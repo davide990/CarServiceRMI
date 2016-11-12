@@ -24,8 +24,8 @@ public class CarServiceClient {
 			Car newCar = new Car();
 			newCar.setId(0);
 			newCar.setModel("fiat 500");
-			c.ajouteCar(newCar);
-			System.out.println(c.rechercheParModel("fiat 500").getToString());			
+			c.addCar(newCar);
+			System.out.println(c.findByModel("fiat 500").getToString());			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

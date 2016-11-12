@@ -12,9 +12,21 @@ public interface ICar extends Remote {
 
 	void setModel(String model) throws RemoteException;
 
-	Date getPurchaseDate() throws RemoteException;
-
-	void setPurchaseDate(Date date) throws RemoteException;
+	String getComment() throws RemoteException;
 	
-	public String getToString() throws RemoteException;
+	void setComment(String comment) throws RemoteException;
+	
+	boolean getIsSold() throws RemoteException;
+	
+	void setIsSold(boolean value) throws RemoteException;
+	
+	boolean getIsRented() throws RemoteException;
+	
+	void setIsRented(boolean value) throws RemoteException;
+	
+	int getYear() throws RemoteException;
+	
+	void setYear(int year) throws RemoteException;
+
+	String getToString() throws RemoteException;
 }

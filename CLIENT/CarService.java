@@ -1,25 +1,34 @@
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @SuppressWarnings("serial")
 public class CarService extends UnicastRemoteObject implements ICarService {
 
 	private HashMap<Long, ICar> cars;
 
+	private final static Logger logger = Logger.getLogger(CarService.class.getName());
+
+	private int totalCars;
+
 	public CarService() throws RemoteException {
 		cars = new HashMap<>();
+		totalCars = 0;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see carsInterface#ajouteCar(Car)
+	 * @see carsInterface#addCar(Car)
 	 */
 	@Override
-	public void ajouteCar(ICar l) {
+	public void addCar(ICar l) {
 		try {
 			cars.put(l.getId(), l);
+			totalCars++;
+			logger.log(Level.INFO, "Car " + l.getModel() + " added");
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -29,12 +38,14 @@ public class CarService extends UnicastRemoteObject implements ICarService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see carsInterface#supprimeCar(Car)
+	 * @see carsInterface#deleteCar(Car)
 	 */
 	@Override
-	public void supprimeCar(ICar l) {
+	public void deleteCar(ICar l) {
 		try {
 			cars.remove(cars.get(l.getId()));
+			totalCars--;
+			logger.log(Level.INFO, "Car " + l.getModel() + " removed");
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -44,30 +55,56 @@ public class CarService extends UnicastRemoteObject implements ICarService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see carsInterface#supprimeCar(java.lang.Long)
+	 * @see carsInterface#deleteCar(java.lang.Long)
 	 */
 	@Override
-	public void supprimeCar(Long ID) {
+	public void deleteCar(Long ID) {
 		cars.remove(ID);
+		totalCars--;
+		logger.log(Level.INFO, "Car with ID " + ID + " removed");
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see carsInterface#updateCar(Car)
+	 */
+	@Override
+	public void updateCar(ICar c)
+	{
+		deleteCar(c);
+		addCar(c);	
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see carsInterface#rechercheParAuteur(java.lang.String)
+	 * @see carsInterface#findByModel(java.lang.String)
 	 */
 	@Override
-	public ICar rechercheParModel(String model) {
+	public ICar findByModel(String model) {
 		for (ICar car : cars.values()) {
 			try {
 				if (car.getModel().equals(model))
+				{
+					logger.log(Level.INFO, "Car " + model + " found");
 					return car;
+				}
 			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		return null;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see carsInterface#totalCars()
+	 */
+	public int totalCars()
+	{
+		return totalCars;
 	}
 
 
