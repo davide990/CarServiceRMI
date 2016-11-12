@@ -136,6 +136,11 @@ public class UserUI extends javax.swing.JFrame {
         );
 
         jButton2.setText("Proceed");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,7 +173,7 @@ public class UserUI extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -199,6 +204,17 @@ public class UserUI extends javax.swing.JFrame {
         jRadioButton1.setSelected(false);
         jRadioButton2.setSelected(false);
     }//GEN-LAST:event_jRadioButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (jRadioButton1.isSelected()) {
+            rentSelectedCar();
+        } else if (jRadioButton2.isSelected()) {
+            buySelectedCar();
+        } else if (jRadioButton3.isSelected()) {
+            giveBackSelectedCar();
+        }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -248,4 +264,22 @@ public class UserUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    private void buySelectedCar() {
+        ICar selectedCar = ClientController.getSelectedCar();
+
+        //......
+    }
+
+    private void rentSelectedCar() {
+        ICar selectedCar = ClientController.getSelectedCar();
+
+        //......
+    }
+
+    private void giveBackSelectedCar() {
+        ICar selectedCar = ClientController.getSelectedCar();
+
+        //......
+    }
 }
