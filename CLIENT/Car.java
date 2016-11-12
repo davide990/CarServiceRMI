@@ -1,4 +1,6 @@
 
+
+
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -14,7 +16,7 @@ public class Car extends UnicastRemoteObject implements Serializable, ICar {
     private int year;
     private long ID;
 
-    protected Car() throws RemoteException {
+    public Car() throws RemoteException {
         super();
     }
 

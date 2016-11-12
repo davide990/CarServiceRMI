@@ -1,4 +1,5 @@
 
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -24,4 +25,8 @@ public interface IUserService extends Remote {
     int totalUser() throws RemoteException;
 
     void updateUser(long id, User u) throws RemoteException;
+
+    boolean authenticateUser(long uid, long pin) throws RemoteException;
+
+    boolean authenticateAdministrator(long pin) throws RemoteException;
 }

@@ -1,4 +1,5 @@
 
+
 import java.rmi.RemoteException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -27,24 +28,40 @@ public class CarServiceClient {
 
         try {
             Car newCar = new Car();
-            newCar.setId(0);
-            newCar.setModel("fiat 500");
-            newCar.setYear(2005);
+            Car c2 = new Car();
+            Car c3 = new Car();
+            Car c4 = new Car();
+
+            c2.setId(0);
+            c2.setModel("fiat 500");
+            c2.setYear(2005);
+
+            c3.setId(1);
+            c3.setModel("audi a5");
+            c3.setYear(2016);
+
+            c4.setId(3);
+            c4.setModel("Toyota bog");
+            c4.setYear(2009);
+
             c.addCar(newCar);
+            c.addCar(c2);
+            c.addCar(c3);
+            c.addCar(c4);
             System.out.println(c.findByModel("fiat 500").getToString());
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-        try {
-            List<ICar> onSale = c.getCarsOnSale();
-            for (ICar car : onSale) {
-                System.out.println("On sale: " + car.getToString());
-            }
-        } catch (RemoteException ex) {
-            Logger.getLogger(CarServiceClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//
+//        try {
+//            List<ICar> onSale = c.getCarsOnSale();
+//            for (ICar car : onSale) {
+//                System.out.println("On sale: " + car.getToString());
+//            }
+//        } catch (RemoteException ex) {
+//            Logger.getLogger(CarServiceClient.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
     }
 }

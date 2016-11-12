@@ -1,4 +1,5 @@
 
+
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -63,6 +64,34 @@ public class UserService extends UnicastRemoteObject implements Serializable, IU
     public void addUser(IUser user) throws RemoteException {
         mlvUsers.put(user.getUid(), user);
         logger.log(Level.INFO, "User " + user.getToString() + " added");
+    }
+
+    @Override
+    public boolean authenticateAdministrator(long pin) {
+        for (IUser u : mlvUsers.values()) {
+            try {
+                if (u.getPin() == pin) {
+                    return true;
+                }
+            } catch (RemoteException ex) {
+                Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean authenticateUser(long uid, long pin) {
+        for (IUser u : mlvUsers.values()) {
+            try {
+                if (u.getUid() == uid && u.getPin() == pin) {
+                    return true;
+                }
+            } catch (RemoteException ex) {
+                Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
     }
 
 }
